@@ -51,7 +51,7 @@ Utile pour les sites de streaming avec pubs agressives — tu peux bloquer les d
 
 ## Vérifier que ça fonctionne
 
-Rends-toi sur [d3ward.github.io/toolz/adblock](https://d3ward.github.io/toolz/adblock/) — vise **90%+**.
+Rends-toi sur [adblock-tester.com](https://adblock-tester.com/) — vise **90%+**.
 
 ---
 
