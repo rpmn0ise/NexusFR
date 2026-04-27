@@ -1,33 +1,40 @@
 module.exports = function(eleventyConfig) {
-  // Passthrough copy
-  eleventyConfig.addPassthroughCopy("src/assets");
 
-  // Collections
-  eleventyConfig.addCollection("categories", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("src/categories/*.md");
-  });
+  eleventyConfig.addPassthroughCopy("src/assets");
 
   eleventyConfig.addCollection("guides", function(collectionApi) {
     return collectionApi.getFilteredByGlob("src/guides/*.md");
   });
 
-  // Filters
-  eleventyConfig.addFilter("statusIcon", function(status) {
-    const icons = { "ok": "✅", "dead": "❌", "unstable": "⚠️" };
-    return icons[status] || "❓";
+  // Ressources = collection d'items Eleventy (item.data = frontmatter)
+  eleventyConfig.addCollection("resources", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("src/resources/**/*.md");
   });
 
-  eleventyConfig.addFilter("tagIcon", function(tag) {
-    const icons = { "fr": "🇫🇷", "fast": "⚡", "safe": "🛡️", "advanced": "🧠", "beginner": "👶" };
-    return icons[tag] || tag;
+  // Filtre : par catégorie (reçoit array d'items Eleventy)
+  eleventyConfig.addFilter("byCat", function(items, category) {
+    return (items || []).filter(item => item.data && item.data.category === category);
+  });
+
+  // Filtre : par sous-catégorie
+  eleventyConfig.addFilter("bySub", function(items, subcategory) {
+    return (items || []).filter(item => item.data && item.data.subcategory === subcategory);
+  });
+
+  // Filtre : essentiels seulement
+  eleventyConfig.addFilter("essential", function(items) {
+    return (items || []).filter(item => item.data && item.data.essential === true);
+  });
+
+  // Filtre : non essentiels
+  eleventyConfig.addFilter("notEssential", function(items) {
+    return (items || []).filter(item => item.data && item.data.essential !== true);
   });
 
   eleventyConfig.addFilter("limit", function(arr, limit) {
-    return arr.slice(0, limit);
+    return (arr || []).slice(0, limit);
   });
 
-  // Si le site est sur username.github.io/nexus-fr/ → PATHPREFIX=/nexus-fr/
-  // Si le site est sur username.github.io/           → pas besoin (défaut "/")
   const pathPrefix = process.env.PATHPREFIX || "/";
 
   return {
