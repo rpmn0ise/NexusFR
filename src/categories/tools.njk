@@ -7,6 +7,11 @@ permalink: /categories/tools/index.html
 
 {% from "components/resource-card.njk" import resourceCard %}
 
+{% set allRes = collections.resources | byCat("tools") %}
+{% set conversion = allRes | bySub("conversion") %}
+{% set privacy = allRes | bySub("privacy") %}
+{% set upload = allRes | bySub("upload") %}
+
 <div class="cat-page-header">
   <div class="container">
     <div class="breadcrumb">
@@ -14,11 +19,8 @@ permalink: /categories/tools/index.html
       <span class="breadcrumb-sep">/</span>
       <span>outils</span>
     </div>
-    <h1 class="cat-page-title">
-      <span>🔧</span> Outils
-    </h1>
+    <h1 class="cat-page-title"><span>🔧</span> Outils</h1>
     <p class="cat-page-desc">Conversion, confidentialité, stockage. Chaque outil ici est open source ou audité.</p>
-
     <div class="filter-bar">
       <span class="mono muted" style="font-size:0.75rem;align-self:center;">filtrer :</span>
       <button class="filter-btn active" data-filter="all">tous</button>
@@ -31,47 +33,66 @@ permalink: /categories/tools/index.html
 
 <div class="container">
 
+  {% if conversion.length %}
   <div class="subsection">
     <div class="subsection-header">
       <span class="subsection-title">Conversion & Téléchargement</span>
       <span class="subsection-label label-essential">essentiel</span>
     </div>
     <div class="resource-list">
-      {{ resourceCard(resources.tools.conversion[0], true) }}
+      {% for item in conversion | essential %}
+        {{ resourceCard(item.data, true) }}
+      {% endfor %}
     </div>
+    {% if conversion | notEssential | length %}
     <div class="subsection-header mt-16">
       <span class="subsection-label label-list">liste complète</span>
     </div>
     <div class="resource-list">
-      {{ resourceCard(resources.tools.conversion[1]) }}
+      {% for item in conversion | notEssential %}
+        {{ resourceCard(item.data) }}
+      {% endfor %}
     </div>
+    {% endif %}
   </div>
+  {% endif %}
 
+  {% if privacy.length %}
   <div class="subsection">
     <div class="subsection-header">
       <span class="subsection-title">Privacy & Sécurité</span>
       <span class="subsection-label label-essential">essentiel</span>
     </div>
     <div class="resource-list">
-      {{ resourceCard(resources.tools.privacy[2], true) }}
-      {{ resourceCard(resources.tools.privacy[1], true) }}
+      {% for item in privacy | essential %}
+        {{ resourceCard(item.data, true) }}
+      {% endfor %}
     </div>
+    {% if privacy | notEssential | length %}
     <div class="subsection-header mt-16">
       <span class="subsection-label label-list">liste complète</span>
     </div>
     <div class="resource-list">
-      {{ resourceCard(resources.tools.privacy[0]) }}
+      {% for item in privacy | notEssential %}
+        {{ resourceCard(item.data) }}
+      {% endfor %}
     </div>
+    {% endif %}
   </div>
+  {% endif %}
 
+  {% if upload.length %}
   <div class="subsection">
     <div class="subsection-header">
       <span class="subsection-title">Upload & Stockage</span>
     </div>
     <div class="resource-list">
-      {{ resourceCard(resources.tools.upload[0]) }}
+      {% for item in upload %}
+        {{ resourceCard(item.data, item.data.essential) }}
+      {% endfor %}
     </div>
   </div>
+  {% endif %}
 
   <div class="subsection">
     <div class="subsection-header">
