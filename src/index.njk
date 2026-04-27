@@ -6,6 +6,9 @@ description: "Bibliothèque FR ultra-sélective d'outils et guides pour utilisat
 
 {% from "components/resource-card.njk" import resourceCard %}
 
+{% set allRes = collections.resources %}
+{% set essentials = allRes | essential | limit(3) %}
+
 <section class="hero">
   <div class="container">
     <p class="hero-label">bibliothèque technique</p>
@@ -20,7 +23,7 @@ description: "Bibliothèque FR ultra-sélective d'outils et guides pour utilisat
         <span class="stat-label">catégories</span>
       </div>
       <div class="stat">
-        <span class="stat-num">15</span>
+        <span class="stat-num">{{ allRes | length }}</span>
         <span class="stat-label">ressources</span>
       </div>
       <div class="stat">
@@ -45,7 +48,7 @@ description: "Bibliothèque FR ultra-sélective d'outils et guides pour utilisat
           <div class="cat-name">Streaming</div>
           <div class="cat-desc">Films, séries, anime, musique</div>
         </div>
-        <span class="cat-count">5 outils</span>
+        <span class="cat-count">{{ allRes | byCat("streaming") | length }} outils</span>
       </a>
       <a href="{{ '/categories/download/' | url }}" class="cat-card">
         <span class="cat-icon">⬇️</span>
@@ -53,7 +56,7 @@ description: "Bibliothèque FR ultra-sélective d'outils et guides pour utilisat
           <div class="cat-name">Download</div>
           <div class="cat-desc">Torrents, DDL, débrideurs</div>
         </div>
-        <span class="cat-count">5 outils</span>
+        <span class="cat-count">{{ allRes | byCat("download") | length }} outils</span>
       </a>
       <a href="{{ '/categories/tools/' | url }}" class="cat-card">
         <span class="cat-icon">🔧</span>
@@ -61,7 +64,7 @@ description: "Bibliothèque FR ultra-sélective d'outils et guides pour utilisat
           <div class="cat-name">Outils</div>
           <div class="cat-desc">Conversion, privacy, upload</div>
         </div>
-        <span class="cat-count">5 outils</span>
+        <span class="cat-count">{{ allRes | byCat("tools") | length }} outils</span>
       </a>
     </div>
   </section>
@@ -70,12 +73,11 @@ description: "Bibliothèque FR ultra-sélective d'outils et guides pour utilisat
     <div class="section-header">
       <span class="section-title">// essentiels</span>
       <span class="section-title-main">Sélection immédiate</span>
-      <a href="{{ '/categories/streaming/' | url }}" class="section-link">voir tout →</a>
     </div>
     <div class="resource-list">
-      {{ resourceCard(resources.streaming.films[0], true) }}
-      {{ resourceCard(resources.streaming.anime[0], true) }}
-      {{ resourceCard(resources.tools.privacy[2], true) }}
+      {% for item in essentials %}
+        {{ resourceCard(item.data, true) }}
+      {% endfor %}
     </div>
   </section>
 
