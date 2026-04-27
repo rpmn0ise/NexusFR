@@ -20,11 +20,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: "npm"
 
       - name: Install dependencies
@@ -32,6 +34,8 @@ jobs:
 
       - name: Build with Eleventy
         run: npm run build
+        env:
+          PATHPREFIX: /NexusFR/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
