@@ -1,0 +1,117 @@
+---
+layout: layouts/base.njk
+title: null
+description: "Bibliothèque FR ultra-sélective d'outils et guides pour utilisateurs tech."
+---
+
+{% from "components/resource-card.njk" import resourceCard %}
+
+<section class="hero">
+  <div class="container">
+    <p class="hero-label">bibliothèque technique</p>
+    <h1>Trouve l'outil fiable.<br><em>En moins de 10 secondes.</em></h1>
+    <p class="hero-desc">
+      Pas un annuaire. Pas une liste exhaustive.<br>
+      Une sélection stricte d'outils vérifiés, avec guides, en français.
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">3</span>
+        <span class="stat-label">catégories</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">15</span>
+        <span class="stat-label">ressources</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">04/26</span>
+        <span class="stat-label">dernière vérif.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-title">// catégories</span>
+      <span class="section-title-main">Accès rapide</span>
+    </div>
+    <div class="cat-grid">
+      <a href="/categories/streaming/" class="cat-card">
+        <span class="cat-icon">📡</span>
+        <div class="cat-info">
+          <div class="cat-name">Streaming</div>
+          <div class="cat-desc">Films, séries, anime, musique</div>
+        </div>
+        <span class="cat-count">5 outils</span>
+      </a>
+      <a href="/categories/download/" class="cat-card">
+        <span class="cat-icon">⬇️</span>
+        <div class="cat-info">
+          <div class="cat-name">Download</div>
+          <div class="cat-desc">Torrents, DDL, débrideurs</div>
+        </div>
+        <span class="cat-count">5 outils</span>
+      </a>
+      <a href="/categories/tools/" class="cat-card">
+        <span class="cat-icon">🔧</span>
+        <div class="cat-info">
+          <div class="cat-name">Outils</div>
+          <div class="cat-desc">Conversion, privacy, upload</div>
+        </div>
+        <span class="cat-count">5 outils</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-title">// essentiels</span>
+      <span class="section-title-main">Sélection immédiate</span>
+      <a href="/categories/streaming/" class="section-link">voir tout →</a>
+    </div>
+    <div class="resource-list">
+      {{ resourceCard(resources.streaming.films[0], true) }}
+      {{ resourceCard(resources.streaming.anime[0], true) }}
+      {{ resourceCard(resources.tools.privacy[2], true) }}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-title">// guides récents</span>
+      <span class="section-title-main">Guides pratiques</span>
+      <a href="/guides/" class="section-link">tous les guides →</a>
+    </div>
+    <div class="guide-grid">
+      <a href="/guides/guide-torrent-debutant/" class="guide-card">
+        <span class="guide-tag">// torrent</span>
+        <span class="guide-title">Débuter avec les torrents</span>
+        <span class="guide-desc">Client, VPN, sites fiables — tout ce qu'il faut savoir</span>
+        <span class="guide-level">👶 débutant</span>
+      </a>
+      <a href="/guides/guide-yt-dlp/" class="guide-card">
+        <span class="guide-tag">// outils</span>
+        <span class="guide-title">yt-dlp en pratique</span>
+        <span class="guide-desc">Télécharger n'importe quelle vidéo ou playlist en 2 commandes</span>
+        <span class="guide-level">🧠 avancé</span>
+      </a>
+      <a href="/guides/guide-ublock/" class="guide-card">
+        <span class="guide-tag">// privacy</span>
+        <span class="guide-title">uBlock Origin — config optimale</span>
+        <span class="guide-desc">Filtres recommandés pour bloquer pubs, trackers et popups</span>
+        <span class="guide-level">👶 débutant</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="notice notice-info">
+      <span>ℹ️</span>
+      <span>Ce site est maintenu manuellement. Chaque lien est vérifié avant publication. Si un lien est mort, ouvre une issue sur GitHub.</span>
+    </div>
+  </section>
+
+</div>

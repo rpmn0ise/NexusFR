@@ -1,0 +1,39 @@
+{% macro resourceCard(resource, essential=false) %}
+<div class="resource-card{% if essential %} essential{% endif %}" data-tags="{% if resource.tags %}{{ resource.tags | join(' ') }}{% endif %}">
+  <div class="resource-header">
+    <span class="resource-name">
+      <a href="{{ resource.url }}" target="_blank" rel="noopener noreferrer">{{ resource.name }}</a>
+    </span>
+    {% if resource.guide %}
+      <a href="/guides/{{ resource.guide }}/" class="resource-guide">guide</a>
+    {% endif %}
+  </div>
+  <div class="resource-meta">
+    <span class="resource-usage">{{ resource.usage }}</span>
+    <span class="resource-why">{{ resource.why }}</span>
+  </div>
+  <div class="resource-side">
+    <span class="resource-status" title="{{ resource.status }}">
+      {% if resource.status === "ok" %}✅
+      {% elif resource.status === "dead" %}❌
+      {% elif resource.status === "unstable" %}⚠️
+      {% else %}❓
+      {% endif %}
+    </span>
+    <div class="resource-tags">
+      {% for tag in resource.tags %}
+        <span class="tag" title="{{ tag }}">
+          {% if tag === "fr" %}🇫🇷
+          {% elif tag === "fast" %}⚡
+          {% elif tag === "safe" %}🛡️
+          {% elif tag === "advanced" %}🧠
+          {% elif tag === "beginner" %}👶
+          {% else %}{{ tag }}
+          {% endif %}
+        </span>
+      {% endfor %}
+    </div>
+    <span class="resource-verified mono">{{ resource.verified }}</span>
+  </div>
+</div>
+{% endmacro %}
