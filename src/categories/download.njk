@@ -7,6 +7,10 @@ permalink: /categories/download/index.html
 
 {% from "components/resource-card.njk" import resourceCard %}
 
+{% set allRes = collections.resources | byCat("download") %}
+{% set torrents = allRes | bySub("torrents") %}
+{% set direct = allRes | bySub("direct") %}
+
 <div class="cat-page-header">
   <div class="container">
     <div class="breadcrumb">
@@ -14,11 +18,8 @@ permalink: /categories/download/index.html
       <span class="breadcrumb-sep">/</span>
       <span>download</span>
     </div>
-    <h1 class="cat-page-title">
-      <span>⬇️</span> Download
-    </h1>
+    <h1 class="cat-page-title"><span>⬇️</span> Download</h1>
     <p class="cat-page-desc">Torrents, téléchargement direct et débrideurs. Fiables, vérifiés.</p>
-
     <div class="filter-bar">
       <span class="mono muted" style="font-size:0.75rem;align-self:center;">filtrer :</span>
       <button class="filter-btn active" data-filter="all">tous</button>
@@ -31,42 +32,51 @@ permalink: /categories/download/index.html
 
 <div class="container">
 
+  {% if torrents.length %}
   <div class="subsection">
     <div class="subsection-header">
       <span class="subsection-title">Torrents</span>
       <span class="subsection-label label-essential">essentiel</span>
     </div>
     <div class="resource-list">
-      {{ resourceCard(resources.download.torrents[0], true) }}
-      {{ resourceCard(resources.download.torrents[2], true) }}
+      {% for item in torrents | essential %}
+        {{ resourceCard(item.data, true) }}
+      {% endfor %}
     </div>
-
+    {% if torrents | notEssential | length %}
     <div class="subsection-header mt-16">
       <span class="subsection-label label-list">liste complète</span>
     </div>
     <div class="resource-list">
-      {{ resourceCard(resources.download.torrents[1]) }}
+      {% for item in torrents | notEssential %}
+        {{ resourceCard(item.data) }}
+      {% endfor %}
     </div>
+    {% endif %}
   </div>
+  {% endif %}
 
+  {% if direct.length %}
   <div class="subsection">
     <div class="subsection-header">
       <span class="subsection-title">Téléchargement Direct</span>
       <span class="subsection-label label-essential">essentiel</span>
     </div>
+    <div class="notice notice-warn">
+      <span>⚠️</span>
+      <span>Utilise toujours un VPN ou Real-Debrid pour le torrent. Recommandé : Mullvad ou ProtonVPN.</span>
+    </div>
     <div class="resource-list">
-      {{ resourceCard(resources.download.direct[0], true) }}
-      {{ resourceCard(resources.download.direct[1], true) }}
+      {% for item in direct %}
+        {{ resourceCard(item.data, item.data.essential) }}
+      {% endfor %}
     </div>
   </div>
+  {% endif %}
 
   <div class="subsection">
     <div class="subsection-header">
       <span class="subsection-title">Guides associés</span>
-    </div>
-    <div class="notice notice-warn">
-      <span>⚠️</span>
-      <span>Utilise toujours un VPN ou Real-Debrid pour le torrent. Recommandé : Mullvad ou ProtonVPN.</span>
     </div>
     <div class="guide-grid">
       <a href="{{ '/guides/guide-torrent-debutant/' | url }}" class="guide-card">
