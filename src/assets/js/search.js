@@ -24,11 +24,11 @@ const searchIndex = [
   { name: "uBlock Origin", usage: "Bloqueur de publicités navigateur", url: "https://github.com/gorhill/uBlock", cat: "outils", tags: ["safe","beginner","fast"] },
   { name: "Gofile", usage: "Upload et partage de fichiers volumineux", url: "https://gofile.io", cat: "outils", tags: ["fast","beginner"] },
   // Guides
-  { name: "Guide: Débuter avec les torrents", usage: "Client, VPN, sites fiables", url: "/guides/guide-torrent-debutant/", cat: "guide", tags: ["beginner"] },
-  { name: "Guide: yt-dlp en pratique", usage: "Télécharger vidéos et playlists", url: "/guides/guide-yt-dlp/", cat: "guide", tags: ["advanced"] },
-  { name: "Guide: uBlock Origin config optimale", usage: "Bloquer pubs, trackers et popups", url: "/guides/guide-ublock/", cat: "guide", tags: ["beginner"] },
-  { name: "Guide: Configurer Real-Debrid", usage: "DDL à vitesse maximale", url: "/guides/guide-real-debrid/", cat: "guide", tags: ["advanced"] },
-  { name: "Guide: Télécharger musique depuis Spotify", usage: "SpotiFlyer, Deemix, alternatives", url: "/guides/guide-telecharger-musique/", cat: "guide", tags: ["advanced"] },
+  { name: "Guide: Débuter avec les torrents", usage: "Client, VPN, sites fiables", url: (window.BASE_PATH || "") + "/guides/guide-torrent-debutant/", cat: "guide", tags: ["beginner"] },
+  { name: "Guide: yt-dlp en pratique", usage: "Télécharger vidéos et playlists", url: (window.BASE_PATH || "") + "/guides/guide-yt-dlp/", cat: "guide", tags: ["advanced"] },
+  { name: "Guide: uBlock Origin config optimale", usage: "Bloquer pubs, trackers et popups", url: (window.BASE_PATH || "") + "/guides/guide-ublock/", cat: "guide", tags: ["beginner"] },
+  { name: "Guide: Configurer Real-Debrid", usage: "DDL à vitesse maximale", url: (window.BASE_PATH || "") + "/guides/guide-real-debrid/", cat: "guide", tags: ["advanced"] },
+  { name: "Guide: Télécharger musique depuis Spotify", usage: "SpotiFlyer, Deemix, alternatives", url: (window.BASE_PATH || "") + "/guides/guide-telecharger-musique/", cat: "guide", tags: ["advanced"] },
 ];
 
 const searchToggle = document.querySelector('.search-toggle');
